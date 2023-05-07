@@ -73,6 +73,12 @@ module critbit::critbit_u64 {
         table::is_empty(&tree.leaves)
     }
 
+    /// Return whether leaf exists
+    public fun has_leaf<V: store>(tree: &CritbitTree<V>, key: u64): bool {
+        let (has_leaf, _) = find_leaf(tree, key);
+        has_leaf
+    }
+
     /// Return (key, index) of the leaf with minimum value
     public fun min_leaf<V: store>(tree: &CritbitTree<V>): (u64, u64) {
         assert!(!is_empty(tree), ELeafNotExist);
