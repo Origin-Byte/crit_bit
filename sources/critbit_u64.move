@@ -286,6 +286,17 @@ module critbit::critbit_u64 {
         value
     }
 
+    /// Remove leaf from the tree by key
+    /// 
+    /// #### Panics
+    /// 
+    /// Panics if the key does not exist in the tree
+    public fun remove_leaf_by_key<V: store>(tree: &mut CritbitTree<V>, key: u64): V {
+        let (is_exist, index) = find_leaf(tree, key);
+        assert!(is_exist, ELeafNotExist);
+        remove_leaf_by_index(tree, index)
+    }    
+
     /// Mutably borrow leaf from the tree by index
     /// 
     /// #### Panics
