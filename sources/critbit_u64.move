@@ -73,6 +73,12 @@ module critbit::critbit_u64 {
         table::is_empty(&tree.leaves)
     }
 
+    /// Return whether leaf exists
+    public fun has_leaf<V: store>(tree: &CritbitTree<V>, key: u64): bool {
+        let (has_leaf, _) = find_leaf(tree, key);
+        has_leaf
+    }
+
     /// Return (key, index) of the leaf with minimum value
     public fun min_leaf<V: store>(tree: &CritbitTree<V>): (u64, u64) {
         assert!(!is_empty(tree), ELeafNotExist);
@@ -286,6 +292,17 @@ module critbit::critbit_u64 {
         value
     }
 
+    /// Remove leaf from the tree by key
+    /// 
+    /// #### Panics
+    /// 
+    /// Panics if the key does not exist in the tree
+    public fun remove_leaf_by_key<V: store>(tree: &mut CritbitTree<V>, key: u64): V {
+        let (is_exist, index) = find_leaf(tree, key);
+        assert!(is_exist, ELeafNotExist);
+        remove_leaf_by_index(tree, index)
+    }    
+
     /// Mutably borrow leaf from the tree by index
     /// 
     /// #### Panics
@@ -296,6 +313,16 @@ module critbit::critbit_u64 {
         &mut entry.value
     }
 
+    /// Mutably borrow leaf from the tree by key
+    /// 
+    /// #### Panics
+    /// 
+    /// Panics if the key does not exist in the tree
+    public fun borrow_mut_leaf_by_key<V: store>(tree: &mut CritbitTree<V>, key: u64): &mut V {
+        let (is_exist, index) = find_leaf(tree, key);
+        assert!(is_exist, ELeafNotExist);
+        borrow_mut_leaf_by_index(tree, index)
+    }
 
     /// Borrow leaf from the tree by index
     /// 
