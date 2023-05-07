@@ -50,7 +50,7 @@ module critbit::critbit_u64 {
         next_leaf_index: u64
     }
 
-    /// Create a new `CritbitTree`
+    /// Create a new critbit tree
     public fun new<V: store>(ctx: &mut TxContext): CritbitTree<V> {
         CritbitTree<V>{
             root: PARTITION_INDEX,

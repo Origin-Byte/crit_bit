@@ -14,8 +14,6 @@ jobs:
 
       - name: Get Sui SDK
         run: |
-          source .env.dist
-
           wget -qO sui https://github.com/MystenLabs/sui/releases/download/sui-v1.0.0/sui
           chmod +x sui
 
