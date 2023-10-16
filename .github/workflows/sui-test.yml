@@ -16,6 +16,7 @@ jobs:
         run: |
           wget -qO sui-mainnet-v1.11.2-ubuntu-x86_64.tgz https://github.com/MystenLabs/sui/releases/download/mainnet-v1.11.2/sui-mainnet-v1.11.2-ubuntu-x86_64.tgz
           tar -xzvf sui-mainnet-v1.11.2-ubuntu-x86_64.tgz
+          cp ./target/release/sui-ubuntu-x86_64 ./sui
           chmod +x sui
 
       - name: Run test for all modules
