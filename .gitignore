@@ -1,3 +1,5 @@
 sui.log.*
 .coverage_*
 build
+
+local/*
